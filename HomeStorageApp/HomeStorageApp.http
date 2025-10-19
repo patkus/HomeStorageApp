@@ -1,0 +1,6 @@
+@HomeStorageApp_HostAddress = http://localhost:5278
+
+GET {{HomeStorageApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

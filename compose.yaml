@@ -1,0 +1,7 @@
+﻿services:
+  homestorageapp:
+    image: homestorageapp
+    build:
+      context: .
+      dockerfile: HomeStorageApp/Dockerfile
+
