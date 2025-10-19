@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".ai", ".ai", "{B1E9F2BF-2E8
 		.ai\project-description.md = .ai\project-description.md
 		.ai\project-summary.md = .ai\project-summary.md
 		.ai\tech-stack.md = .ai\tech-stack.md
+		.ai\api-plan.md = .ai\api-plan.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2C74E538-4BD5-4B71-8BC2-2DFFC7FF70C2}"
@@ -55,6 +56,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Locations", "Locations", "{
 		src\Modules\Locations\HomeStorageApp.Locations.Persistence\HomeStorageApp.Locations.Persistence.csproj = src\Modules\Locations\HomeStorageApp.Locations.Persistence\HomeStorageApp.Locations.Persistence.csproj
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prompts", "prompts", "{2DE0326C-641C-40B3-9E2C-E0BAADD8A1F1}"
+	ProjectSection(SolutionItems) = preProject
+		.ai\prompts\api-layer-rest-api.md = .ai\prompts\api-layer-rest-api.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,5 +79,6 @@ Global
 		{7A4A236D-E872-4265-ACDF-EC6E6C07FE9E} = {CCF5DDE6-DCC8-4CB7-A62F-31069C8595B8}
 		{62701F88-D266-47E6-9A6F-FAFA51070D0A} = {CCF5DDE6-DCC8-4CB7-A62F-31069C8595B8}
 		{FABC7E70-8B17-4AC3-8A5C-C7E4AC206C22} = {CCF5DDE6-DCC8-4CB7-A62F-31069C8595B8}
+		{2DE0326C-641C-40B3-9E2C-E0BAADD8A1F1} = {B1E9F2BF-2E8B-4C3A-903B-601C46B23481}
 	EndGlobalSection
 EndGlobal
