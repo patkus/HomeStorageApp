@@ -1,2 +1,11 @@
 ﻿.idea
 HomeStorageApp/obj
+src/Shared/HomeStorageApp.Shared/obj
+src/Modules/Identity/HomeStorageApp.Identity.Core/bin
+src/Modules/Identity/HomeStorageApp.Identity.Core/obj
+src/Modules/Identity/HomeStorageApp.Identity.Api/obj
+src/Modules/Identity/HomeStorageApp.Identity.Persistence/obj
+src/Shared/HomeStorageApp.Shared/bin
+HomeStorageApp/bin
+src/Modules/Identity/HomeStorageApp.Identity.Api/bin
+src/Modules/Identity/HomeStorageApp.Identity.Persistence/bin

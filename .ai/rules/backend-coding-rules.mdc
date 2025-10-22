@@ -1,0 +1,22 @@
+## Backend
+1. Dla typów record lub exception bez logiki stosuj primiary constructors:
+
+np.
+
+public record Test();
+
+public record TestException();
+
+2. Tam gdzie jest potrzebna sama data stosuj typ DateOnly.
+3. Tam gdzie jest potrzebna data z czasem stosuj typ DateTimeOffset.
+4. Instrukcje warunkowe i pętle stosuj zawsze z nawiasami klamrowymi, nawet jeśli są jednolinijkowe.
+5. Nie stosuj bibliotek zewnętrznych spoza ekosystemu .NET, chyba że jesteś o to poproszony.
+6. Nigdy nie grupuj wielu typów w jednej klasie, zawsze rozbijaj na osobne pliki.
+7. Stosuj nazwy biznesowe nietechniczne w nazewnictwie folderów
+
+np. zamiast Domain - Entities, stosuj Domain - Users, Accounts, itp.
+
+
+8. Dodawaj komentarze do każdego pola, metody, klasy, obiekty itp.
+9. Dodawaj komentarze wewnątrz metody jeżeli posiada złożoną logikę biznesową lub sama w sobie jest złożona.
+10. Zawsze używaj primary constructors bez pól prywatnych w przypadku Dependency Injection.
