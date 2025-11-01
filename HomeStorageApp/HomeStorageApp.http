@@ -1,6 +1,114 @@
 @HomeStorageApp_HostAddress = http://localhost:5278
 
-GET {{HomeStorageApp_HostAddress}}/weatherforecast/
+###
+# Authentication Endpoints
+###
+
+# Register a new user
+POST {{HomeStorageApp_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "Password123!",
+  "confirmPassword": "Password123!"
+}
+
+###
+
+# Login
+POST {{HomeStorageApp_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "Password123!"
+}
+
+###
+
+# Logout (requires JWT token)
+POST {{HomeStorageApp_HostAddress}}/api/auth/logout
+Authorization: Bearer YOUR_ACCESS_TOKEN_HERE
+Content-Type: application/json
+
+{
+  "refreshToken": "YOUR_REFRESH_TOKEN_HERE"
+}
+
+###
+# Drugs Endpoints (all require JWT Authorization)
+###
+
+# Get list of drugs
+GET {{HomeStorageApp_HostAddress}}/api/drugs?page=1&pageSize=20&sortBy=name&filterName=
+Authorization: Bearer YOUR_ACCESS_TOKEN_HERE
 Accept: application/json
 
 ###
+
+# Create a new drug
+POST {{HomeStorageApp_HostAddress}}/api/drugs
+Authorization: Bearer YOUR_ACCESS_TOKEN_HERE
+Content-Type: application/json
+
+{
+  "name": "Aspirin",
+  "primaryUnitId": "550e8400-e29b-41d4-a716-446655440000",
+  "barcodes": [
+    "1234567890123"
+  ],
+  "derivedUnits": [
+    {
+      "name": "Tablet",
+      "baseUnitId": "550e8400-e29b-41d4-a716-446655440000",
+      "conversionFactor": 1.0,
+      "isDefaultPurchaseUnit": true,
+      "barcodes": []
+    }
+  ]
+}
+
+###
+
+# Get drug by ID
+GET {{HomeStorageApp_HostAddress}}/api/drugs/550e8400-e29b-41d4-a716-446655440000
+Authorization: Bearer YOUR_ACCESS_TOKEN_HERE
+Accept: application/json
+
+###
+
+# Update drug
+PUT {{HomeStorageApp_HostAddress}}/api/drugs/550e8400-e29b-41d4-a716-446655440000
+Authorization: Bearer YOUR_ACCESS_TOKEN_HERE
+Content-Type: application/json
+
+{
+  "name": "Updated Aspirin",
+  "barcodes": [
+    "1234567890123",
+    "2345678901234"
+  ],
+  "derivedUnits": [
+    {
+      "id": "660e8400-e29b-41d4-a716-446655440001",
+      "name": "Tablet",
+      "baseUnitId": "550e8400-e29b-41d4-a716-446655440000",
+      "conversionFactor": 1.0,
+      "isDefaultPurchaseUnit": true,
+      "barcodes": []
+    }
+  ]
+}
+
+###
+
+# Archive drug (soft delete)
+DELETE {{HomeStorageApp_HostAddress}}/api/drugs/550e8400-e29b-41d4-a716-446655440000
+Authorization: Bearer YOUR_ACCESS_TOKEN_HERE
+
+###
+
+# Restore archived drug
+POST {{HomeStorageApp_HostAddress}}/api/drugs/550e8400-e29b-41d4-a716-446655440000/restore
+Authorization: Bearer YOUR_ACCESS_TOKEN_HERE
