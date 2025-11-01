@@ -1,0 +1,40 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/.ai/">
+    <File Path=".ai/api-plan.md" />
+    <File Path=".ai/prd.md" />
+    <File Path=".ai/project-description.md" />
+    <File Path=".ai/project-summary.md" />
+    <File Path=".ai/tech-stack.md" />
+  </Folder>
+  <Folder Name="/.ai/prompts/">
+    <File Path=".ai/prompts/api-layer-rest-api.md" />
+  </Folder>
+  <Folder Name="/.ai/rules/">
+    <File Path=".ai/rules/backend-coding-rules.mdc" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="compose.yaml" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Drugs/">
+    <Project Path="src/Modules/Drugs/HomeStorageApp.Drugs.Api/HomeStorageApp.Drugs.Api.csproj" />
+    <Project Path="src/Modules/Drugs/HomeStorageApp.Drugs.Core/HomeStorageApp.Drugs.Core.csproj" />
+    <Project Path="src/Modules/Drugs/HomeStorageApp.Drugs.Persistence/HomeStorageApp.Drugs.Persistence.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Identity/">
+    <Project Path="src/Modules/Identity/HomeStorageApp.Identity.Api/HomeStorageApp.Identity.Api.csproj" />
+    <Project Path="src/Modules/Identity/HomeStorageApp.Identity.Core/HomeStorageApp.Identity.Core.csproj" />
+    <Project Path="src/Modules/Identity/HomeStorageApp.Identity.Persistence/HomeStorageApp.Identity.Persistence.csproj" />
+  </Folder>
+  <Folder Name="/src/Shared/">
+    <Project Path="src/Shared/HomeStorageApp.Shared/HomeStorageApp.Shared.csproj" />
+  </Folder>
+  <Project Path="HomeStorageApp/HomeStorageApp.csproj" />
+</Solution>
