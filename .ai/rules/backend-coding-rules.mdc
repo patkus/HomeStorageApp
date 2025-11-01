@@ -1,22 +1,210 @@
-## Backend
-1. Dla typów record lub exception bez logiki stosuj primiary constructors:
+# Backend - Zasady Kodowania
 
-np.
+## 1. Primary Constructors
 
+Dla typów `record` lub `exception` **bez logiki** stosuj **primary constructors**:
+
+```csharp
 public record Test();
 
 public record TestException();
+```
 
-2. Tam gdzie jest potrzebna sama data stosuj typ DateOnly.
-3. Tam gdzie jest potrzebna data z czasem stosuj typ DateTimeOffset.
-4. Instrukcje warunkowe i pętle stosuj zawsze z nawiasami klamrowymi, nawet jeśli są jednolinijkowe.
-5. Nie stosuj bibliotek zewnętrznych spoza ekosystemu .NET, chyba że jesteś o to poproszony.
-6. Nigdy nie grupuj wielu typów w jednej klasie, zawsze rozbijaj na osobne pliki.
-7. Stosuj nazwy biznesowe nietechniczne w nazewnictwie folderów
+---
 
-np. zamiast Domain - Entities, stosuj Domain - Users, Accounts, itp.
+## 2. Typy Daty
 
+### DateOnly
+Tam gdzie jest potrzebna **sama data** stosuj typ `DateOnly`.
 
-8. Dodawaj komentarze do każdego pola, metody, klasy, obiekty itp.
-9. Dodawaj komentarze wewnątrz metody jeżeli posiada złożoną logikę biznesową lub sama w sobie jest złożona.
-10. Zawsze używaj primary constructors bez pól prywatnych w przypadku Dependency Injection.
+```csharp
+public DateOnly BirthDate { get; init; }
+```
+
+### DateTimeOffset
+Tam gdzie jest potrzebna **data z czasem** stosuj typ `DateTimeOffset`.
+
+```csharp
+public DateTimeOffset CreatedAt { get; init; }
+```
+
+---
+
+## 3. Instrukcje Warunkowe i Pętle
+
+**Zawsze** stosuj nawiasy klamrowe, nawet jeśli są jednolinijkowe.
+
+✅ **Poprawnie:**
+```csharp
+if (condition)
+{
+    DoSomething();
+}
+
+for (int i = 0; i < 10; i++)
+{
+    Process(i);
+}
+```
+
+❌ **Niepoprawnie:**
+```csharp
+if (condition)
+    DoSomething();
+
+for (int i = 0; i < 10; i++)
+    Process(i);
+```
+
+---
+
+## 4. Biblioteki Zewnętrzne
+
+**Nie stosuj** bibliotek zewnętrznych spoza ekosystemu .NET, chyba że jesteś o to poproszony.
+
+---
+
+## 5. Organizacja Plików
+
+**Nigdy nie grupuj** wielu typów w jednej klasie. **Zawsze rozbijaj** na osobne pliki.
+
+✅ **Poprawnie:**
+```
+/Users
+    User.cs
+    UserRepository.cs
+    IUserRepository.cs
+```
+
+❌ **Niepoprawnie:**
+```
+/Users
+    UserModels.cs  // zawiera User, UserRepository, IUserRepository
+```
+
+---
+
+## 6. Nazewnictwo Folderów
+
+Stosuj **nazwy biznesowe nietechniczne** w nazewnictwie folderów.
+
+✅ **Poprawnie:**
+```
+/Domain
+    /Users
+    /Accounts
+    /Orders
+```
+
+❌ **Niepoprawnie:**
+```
+/Domain
+    /Entities
+    /ValueObjects
+    /Aggregates
+```
+
+---
+
+## 7. Komentarze XML
+
+Dodawaj komentarze XML do **każdego**:
+- Pola
+- Metody
+- Klasy
+- Właściwości
+- Interfejsu
+
+```csharp
+/// <summary>
+/// Reprezentuje użytkownika w systemie
+/// </summary>
+public class User
+{
+    /// <summary>
+    /// Unikalny identyfikator użytkownika
+    /// </summary>
+    public Guid Id { get; init; }
+
+    /// <summary>
+    /// Adres email użytkownika
+    /// </summary>
+    public Email Email { get; init; }
+}
+```
+
+---
+
+## 8. Komentarze Wewnętrzne
+
+Dodawaj komentarze **wewnątrz metody** jeżeli posiada:
+- Złożoną logikę biznesową
+- Sama w sobie jest złożona
+
+```csharp
+public async Task<Result> ProcessOrder(Order order)
+{
+    // Walidacja dostępności produktów w magazynie
+    var availabilityCheck = await CheckProductAvailability(order.Items);
+    if (!availabilityCheck.IsSuccess)
+    {
+        return Result.Failure("Products not available");
+    }
+
+    // Obliczenie ceny końcowej z uwzględnieniem rabatów i promocji
+    var finalPrice = CalculateFinalPrice(order, availabilityCheck.Discounts);
+
+    // Rezerwacja produktów w magazynie
+    await ReserveProducts(order.Items);
+
+    return Result.Success();
+}
+```
+
+---
+
+## 9. Dependency Injection
+
+**Zawsze używaj** primary constructors **bez pól prywatnych** w przypadku Dependency Injection.
+
+✅ **Poprawnie:**
+```csharp
+public class UserService(
+    IUserRepository userRepository,
+    IPasswordHasher passwordHasher,
+    ILogger<UserService> logger)
+{
+    public async Task<Result> CreateUser(CreateUserCommand command)
+    {
+        var user = new User
+        {
+            Email = command.Email,
+            Password = passwordHasher.Hash(command.Password)
+        };
+
+        await userRepository.AddAsync(user);
+        logger.LogInformation("User created: {Email}", user.Email);
+
+        return Result.Success();
+    }
+}
+```
+
+❌ **Niepoprawnie:**
+```csharp
+public class UserService
+{
+    private readonly IUserRepository _userRepository;
+    private readonly IPasswordHasher _passwordHasher;
+    private readonly ILogger<UserService> _logger;
+
+    public UserService(
+        IUserRepository userRepository,
+        IPasswordHasher passwordHasher,
+        ILogger<UserService> logger)
+    {
+        _userRepository = userRepository;
+        _passwordHasher = passwordHasher;
+        _logger = logger;
+    }
+}
