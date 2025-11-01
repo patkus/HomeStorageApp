@@ -23,6 +23,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\src\Modules\Identity\HomeStorageApp.Identity.Api\HomeStorageApp.Identity.Api.csproj" />
+      <ProjectReference Include="..\src\Modules\Drugs\HomeStorageApp.Drugs.Api\HomeStorageApp.Drugs.Api.csproj" />
     </ItemGroup>
 
 </Project>

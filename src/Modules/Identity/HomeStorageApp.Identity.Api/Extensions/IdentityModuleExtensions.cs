@@ -7,9 +7,11 @@ using HomeStorageApp.Identity.Core.Infrastructure.Security;
 using HomeStorageApp.Identity.Persistence;
 using HomeStorageApp.Identity.Persistence.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace HomeStorageApp.Identity.Api.Extensions;
@@ -80,5 +82,28 @@ public static class IdentityModuleExtensions
         services.AddAuthorization();
 
         return services;
+    }
+
+    /// <summary>
+    /// Aplikuje automatyczne migracje dla modułu Identity
+    /// </summary>
+    /// <param name="app">Aplikacja</param>
+    public static async Task UseIdentityMigrationsAsync(this WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+        var services = scope.ServiceProvider;
+        var logger = services.GetRequiredService<ILogger<IdentityDbContext>>();
+
+        try
+        {
+            var context = services.GetRequiredService<IdentityDbContext>();
+            await context.Database.MigrateAsync();
+            logger.LogInformation("Identity database migration completed successfully");
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "An error occurred while migrating the Identity database");
+            throw;
+        }
     }
 }

@@ -9,3 +9,9 @@ src/Shared/HomeStorageApp.Shared/bin
 HomeStorageApp/bin
 src/Modules/Identity/HomeStorageApp.Identity.Api/bin
 src/Modules/Identity/HomeStorageApp.Identity.Persistence/bin
+src/Modules/Drugs/HomeStorageApp.Drugs.Api/bin
+src/Modules/Drugs/HomeStorageApp.Drugs.Api/obj
+src/Modules/Drugs/HomeStorageApp.Drugs.Persistence/bin
+src/Modules/Drugs/HomeStorageApp.Drugs.Persistence/obj
+src/Modules/Drugs/HomeStorageApp.Drugs.Core/obj
+src/Modules/Drugs/HomeStorageApp.Drugs.Core/bin

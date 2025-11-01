@@ -11,4 +11,9 @@
         <ProjectReference Include="..\HomeStorageApp.Drugs.Persistence\HomeStorageApp.Drugs.Persistence.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.9" />
+    </ItemGroup>
+
 </Project>
